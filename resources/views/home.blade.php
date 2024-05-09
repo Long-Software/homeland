@@ -3,16 +3,16 @@
 @section('content')
 <div class="slide-one-item home-slider owl-carousel">
     @foreach ($props as $prop)
-    <div class="site-blocks-cover overlay" style="background-image: url({{ asset('assets/images/hero_bg_1.jpg') }});"
+    <div class="site-blocks-cover overlay" style="background-image: url({{ asset('assets/images/'.$prop->img_url) }});"
         data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
-                    <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">For
-                        Rent</span>
+                    <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">{{
+                        $prop->type }}</span>
                     <h1 class="mb-2">{{ $prop->title }}</h1>
                     <p class="mb-5"><strong class="h2 text-success font-weight-bold">${{ $prop->price }}</strong></p>
-                    <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
+                    <p><a href="{{ route('properties.show', $prop->id) }}" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
                             Details</a></p>
                 </div>
             </div>
@@ -114,40 +114,39 @@
 
 <div class="site-section site-section-sm bg-light">
     <div class="container">
-
         <div class="row mb-5">
+            @foreach ($props as $prop)
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="property-entry h-100">
-                    <a href="property-details.html" class="property-thumbnail">
+                    <a href="{{ route('properties.show', $prop->id) }}" class="property-thumbnail">
                         <div class="offer-type-wrap">
-                            <span class="offer-type bg-danger">Sale</span>
-                            <span class="offer-type bg-success">Rent</span>
+                            <span class="offer-type bg-success">{{ $prop->type }}</span>
                         </div>
-                        <img src="{{ asset('assets/images/img_1.jpg') }}" alt="Image" class="img-fluid">
+                        <img src="{{ asset('assets/images/'.$prop->img_url) }}" alt="{{ $prop->img_url }}" class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
                         <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                        <h2 class="property-title"><a href="property-details.html">625 S. Berendo St</a></h2>
-                        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> 625
-                            S. Berendo St Unit 607 Los Angeles, CA 90005</span>
-                        <strong class="property-price text-primary mb-3 d-block text-success">$2,265,500</strong>
+                        <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title }}</a></h2>
+                        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ $prop->address }}</span>
+                        <strong class="property-price text-primary mb-3 d-block text-success">${{ $prop->price }}</strong>
                         <ul class="property-specs-wrap mb-3 mb-lg-0">
                             <li>
                                 <span class="property-specs">Beds</span>
-                                <span class="property-specs-number">2 <sup>+</sup></span>
+                                <span class="property-specs-number">{{ $prop->beds }} <sup>+</sup></span>
                             </li>
                             <li>
                                 <span class="property-specs">Baths</span>
-                                <span class="property-specs-number">2</span>
+                                <span class="property-specs-number">{{ $prop->baths }}</span>
                             </li>
                             <li>
                                 <span class="property-specs">SQ FT</span>
-                                <span class="property-specs-number">7,000</span>
+                                <span class="property-specs-number">{{ $prop->sqaure_foot }}</span>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>

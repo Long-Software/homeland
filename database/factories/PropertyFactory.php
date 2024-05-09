@@ -19,7 +19,7 @@ class PropertyFactory extends Factory
         return [
             'title' => $this->faker->name(),
             'price' => $this->faker->name(),
-            'img_url' => $this->faker->name(),
+            'img_url' => 'hero_bg_2.jpg',
             'beds' => $this->faker->name(),
             'baths' => $this->faker->name(),
             'sqaure_foot' => $this->faker->name(),

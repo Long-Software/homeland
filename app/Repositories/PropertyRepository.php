@@ -11,4 +11,11 @@ class PropertyRepository
     {
         return Property::all();
     }
+    public function find($id)
+    {
+        $prop = Property::find($id);
+        if (!$prop)
+            abort(404, 'Property was not found!');
+        return $prop;
+    }
 }
