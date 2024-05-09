@@ -12,8 +12,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        // $property = Property::all()->take(9)->orderBy('created_at', 'desc');
-        return view('home', compact('property'));   
+        $props = Property::all()->take(9)->orderBy('created_at', 'desc');
+        return view('home', compact('props'));   
     }
 
     /**
