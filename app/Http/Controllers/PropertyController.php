@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\Request as ModelsRequest;
 use App\Repositories\PropertyRepository;
 use Illuminate\Http\Request;
 
@@ -18,8 +19,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $props = $this->propertyRepository->all()->take(9)->sortBy('created_at', descending: true);
-        return view('home', compact('props'));   
+        $props = $this->propertyRepository->all()->take(9);
+        return view('home', compact('props'));
     }
 
     /**
@@ -41,10 +42,12 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show($id)
     {
         $prop = $this->propertyRepository->find($id);
-        return view('pages.property.single-property', compact('prop'));
+        $propImgs = $this->propertyRepository->findImage(1);
+        $relProps = $this->propertyRepository->findRelated($id);
+        return view('pages.property.single-property', compact('prop', 'propImgs', 'relProps'));
     }
 
     /**
@@ -69,5 +72,24 @@ class PropertyController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function request(Request $request, $id)
+    {
+        $request->validate([
+            'agent_name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required'
+        ]);
+
+        ModelsRequest::create([
+            'property_id' => $id,
+            'agent_name' => $request->agent_name,
+            'user_id' => 1,
+            'name' => 'Long',
+            'email' => $request->email,
+            'phone' => $request->phone
+        ]);
+        return redirect()->back()->with('success', 'Request has successfully be made');
     }
 }

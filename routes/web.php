@@ -23,3 +23,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('properties', PropertyController::class);
+Route::post('/properties/{id}', [PropertyController::class, 'request'])->name('properties.request');

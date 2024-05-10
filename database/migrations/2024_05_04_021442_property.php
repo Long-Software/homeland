@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('price');
+            $table->float('price');
             $table->string('img_url');
-            $table->string('beds');
-            $table->string('baths');
+            $table->integer('beds');
+            $table->integer('baths');
             $table->string('sqaure_foot');
             $table->string('house_type');
             $table->string('year_built');

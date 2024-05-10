@@ -11,8 +11,9 @@
                     <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">{{
                         $prop->type }}</span>
                     <h1 class="mb-2">{{ $prop->title }}</h1>
-                    <p class="mb-5"><strong class="h2 text-success font-weight-bold">${{ $prop->price }}</strong></p>
-                    <p><a href="{{ route('properties.show', $prop->id) }}" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
+                    <p class="mb-5"><strong class="h2 text-success font-weight-bold">@currency($prop->price)</strong></p>
+                    <p><a href="{{ route('properties.show', $prop->id) }}"
+                            class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
                             Details</a></p>
                 </div>
             </div>
@@ -28,7 +29,7 @@
                     <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For
                         Sale</span>
                     <h1 class="mb-2">625 S. Berendo St</h1>
-                    <p class="mb-5"><strong class="h2 text-success font-weight-bold">$1,000,500</strong></p>
+                    <p class="mb-5"><strong class="h2 text-success font-weight-bold"> @currency(1000500) </strong></p>
                     <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
                             Details</a></p>
                 </div>
@@ -122,13 +123,16 @@
                         <div class="offer-type-wrap">
                             <span class="offer-type bg-success">{{ $prop->type }}</span>
                         </div>
-                        <img src="{{ asset('assets/images/'.$prop->img_url) }}" alt="{{ $prop->img_url }}" class="img-fluid">
+                        <img src="{{ asset('assets/images/'.$prop->img_url) }}" alt="{{ $prop->img_url }}"
+                            class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
                         <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                        <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title }}</a></h2>
-                        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ $prop->address }}</span>
-                        <strong class="property-price text-primary mb-3 d-block text-success">${{ $prop->price }}</strong>
+                        <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title
+                                }}</a></h2>
+                        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{
+                            $prop->address }}</span>
+                        <strong class="property-price text-primary mb-3 d-block text-success">@currency($prop->price)</strong>
                         <ul class="property-specs-wrap mb-3 mb-lg-0">
                             <li>
                                 <span class="property-specs">Beds</span>
