@@ -13,7 +13,7 @@
         </div>
     </div>
 </div>
-@if (session()->has('success'))
+@if (session()->has('make request'))
 <div class="container">
     <div class="alert alert-success">
         <p>{{ !! session('success') }}</p>
@@ -161,9 +161,10 @@
                             class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
-                        <a href="{{ route('properties.show', $prop->id) }}" class="property-favorite"><span
+                        <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span
                                 class="icon-heart-o"></span></a>
-                        <h2 class="property-title"><a href="property-details.html">{{ $prop->title }}</a></h2>
+                        <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title
+                                }}</a></h2>
                         <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span>{{
                             $prop->location }}</span>
                         <strong

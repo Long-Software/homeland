@@ -24,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('properties', PropertyController::class);
 Route::post('/properties/{id}', [PropertyController::class, 'request'])->name('properties.request');
+Route::get('/properties/{id}/save', [PropertyController::class, 'save'])->name('properties.save');

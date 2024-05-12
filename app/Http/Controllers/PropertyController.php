@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\PropertySaved;
 use App\Models\Request as ModelsRequest;
 use App\Repositories\PropertyRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -86,10 +88,21 @@ class PropertyController extends Controller
             'property_id' => $id,
             'agent_name' => $request->agent_name,
             'user_id' => 1,
+            // 'user_id' => Auth::id(),
             'name' => 'Long',
             'email' => $request->email,
             'phone' => $request->phone
         ]);
-        return redirect()->back()->with('success', 'Request has successfully be made');
+        return redirect()->back()->with('make request', 'Request has successfully been made');
+    }
+    public function save($id)
+    {
+        $prop = $this->propertyRepository->find($id);
+        PropertySaved::create([
+            'property_id' => $prop->id,
+            'user_id' => 1,
+            // 'user_id' => Auth::id(),
+        ]);
+        return redirect()->back()->with('save property', 'Property has successfully been saved');
     }
 }

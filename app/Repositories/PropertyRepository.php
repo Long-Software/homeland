@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Property;
 use App\Models\PropertyImage;
+use App\Models\Request;
 use Illuminate\Database\Eloquent\Collection;
 
 class PropertyRepository
@@ -29,5 +30,10 @@ class PropertyRepository
     {
         $props = $this->all()->where('house_type', $this->find($id)->house_type)->where('id', '!=', $id)->take(3);
         return $props;
+    }
+
+    public function findRequest($id) {
+        $requests = Request::where('property_id', $id);
+        return $requests;
     }
 }
