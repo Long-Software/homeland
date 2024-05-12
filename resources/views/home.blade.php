@@ -127,7 +127,7 @@
                             class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
-                        <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+                        <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span class="icon-heart-o"></span></a>
                         <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title
                                 }}</a></h2>
                         <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{
@@ -136,7 +136,7 @@
                         <ul class="property-specs-wrap mb-3 mb-lg-0">
                             <li>
                                 <span class="property-specs">Beds</span>
-                                <span class="property-specs-number">{{ $prop->beds }} <sup>+</sup></span>
+                                <span class="property-specs-number">{{ $prop->beds }}</span>
                             </li>
                             <li>
                                 <span class="property-specs">Baths</span>
@@ -253,7 +253,6 @@
                 <div class="team-member">
                     <img src="{{ asset('assets/images/person_3.jpg') }}" alt="Image" class="img-fluid rounded mb-4">
                     <div class="text">
-
                         <h2 class="mb-2 font-weight-light text-black h4">Philip Martin</h2>
                         <span class="d-block mb-3 text-white-opacity-05">Real Estate Agent</span>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores illo iusto, inventore, iure

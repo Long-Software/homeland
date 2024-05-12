@@ -172,7 +172,7 @@
                         <ul class="property-specs-wrap mb-3 mb-lg-0">
                             <li>
                                 <span class="property-specs">Beds</span>
-                                <span class="property-specs-number">{{ $prop->beds }} <sup>+</sup></span>
+                                <span class="property-specs-number">{{ $prop->beds }}</span>
                             </li>
                             <li>
                                 <span class="property-specs">Baths</span>
