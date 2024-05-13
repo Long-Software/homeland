@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class PropertyRepository
 {
-    public function all(): Collection
+    public function all($order='desc'): Collection
     {
-        return Property::latest()->get();
+        return Property::orderBy('created_at', $order)->get();
     }
     public function find($id)
     {
@@ -32,8 +32,13 @@ class PropertyRepository
         return $props;
     }
 
-    public function findRequest($id) {
+    public function findRequest($id)
+    {
         $requests = Request::where('property_id', $id);
         return $requests;
+    }
+    public function getAllByPrice($order='desc') {
+        $props = Property::orderBy('price', $order)->get();
+        return $props;
     }
 }

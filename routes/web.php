@@ -21,6 +21,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 
+Route::get('/properties/price', [PropertyController::class, 'price'])->name('properties.price');
 Route::resource('properties', PropertyController::class);
 Route::post('/properties/{id}', [PropertyController::class, 'request'])->name('properties.request');
 Route::get('/properties/{id}/save', [PropertyController::class, 'save'])->name('properties.save');
