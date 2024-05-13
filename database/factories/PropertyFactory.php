@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,8 +16,7 @@ class PropertyFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
-        $house_type = ['Condo', 'Property Land'];
+    {  
         return [
             'title' => $this->faker->name(),
             'price' => $this->faker->randomFloat(2,0,100000),
@@ -25,13 +25,13 @@ class PropertyFactory extends Factory
             'baths' => $this->faker->numberBetween(1,10),
             'sqaure_foot' => $this->faker->name(),
             'length' => $this->faker->name(),
-            'house_type' => $this->faker->randomElement($house_type),
+            'house_type' => $this->faker->randomElement(Property::HOUSE_TYPE),
             'year_built' => $this->faker->name(),
             'price_per_square' => $this->faker->name(),
             'info' => $this->faker->name(),
             'address' => $this->faker->name(),
             'agent_name' => $this->faker->name(),
-            'type' => $this->faker->name(),
+            'type' => $this->faker->randomElement(Property::TYPE),
         ];
     }
 }

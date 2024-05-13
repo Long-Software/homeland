@@ -24,19 +24,19 @@
             <li class="active">
               <a href="index.html">Home</a>
             </li>
-            <li><a href="buy.html">Buy</a></li>
-            <li><a href="rent.html">Rent</a></li>
+            <li><a href="{{ route('properties.type', 'Buy') }}">Buy</a></li>
+            <li><a href="{{ route('properties.type', 'Rent') }}">Rent</a></li>
             <li class="has-children">
               <a href="properties.html">Properties</a>
               <ul class="dropdown arrow-top">
-                <li><a href="#">Condo</a></li>
-                <li><a href="#">Property Land</a></li>
-                <li><a href="#">Commercial Building</a></li>
+                <li><a href="{{ route('properties.type', 'Condo') }}">Condo</a></li>
+                <li><a href="{{ route('properties.type', 'Property Land') }}">Property Land</a></li>
+                <li><a href="{{ route('properties.type', 'Commercial Building') }}">Commercial Building</a></li>
 
               </ul>
             </li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="{{ route('about') }}">About</a></li>
+            <li><a href="{{ route('contact') }}">Contact</a></li>
             @auth
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"

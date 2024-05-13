@@ -105,4 +105,9 @@ class PropertyController extends Controller
         ]);
         return redirect()->back()->with('save property', 'Property has successfully been saved');
     }
+    public function type($type)
+    {
+        $props = $this->propertyRepository->all()->filter(fn ($prop) => $prop->type == $type || $prop->house_type == $type);
+        return view('home', compact('props'));
+    }
 }

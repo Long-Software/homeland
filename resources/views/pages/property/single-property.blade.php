@@ -50,6 +50,10 @@
                                     <span class="property-specs">SQ FT</span>
                                     <span class="property-specs-number">{{ $prop->sqaure_foot }}</span>
                                 </li>
+                                <li>
+                                    <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span
+                                        class="icon-heart-o"></span></a>
+                                </li>
                             </ul>
                         </div>
                     </div>

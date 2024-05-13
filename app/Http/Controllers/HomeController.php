@@ -27,7 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $props = $this->propertyRepository->all()->take(9)->sortBy('created_at', descending: true);
+        $props = $this->propertyRepository->all()->take(9);
         return view('home', compact('props'));
+    }
+    public function contact() {
+        return view('pages.contact');
+    }
+    public function about() {
+        return view('pages.about');
     }
 }

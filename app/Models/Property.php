@@ -24,4 +24,6 @@ class Property extends Model
         'agent_name',
         'type',
     ];
+    public const TYPE =  ['Rent', 'Buy'];
+    public const HOUSE_TYPE = ['Condo', 'Property Land', 'Commercial Building'];
 }

@@ -11,7 +11,8 @@
                     <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">{{
                         $prop->type }}</span>
                     <h1 class="mb-2">{{ $prop->title }}</h1>
-                    <p class="mb-5"><strong class="h2 text-success font-weight-bold">@currency($prop->price)</strong></p>
+                    <p class="mb-5"><strong class="h2 text-success font-weight-bold">@currency($prop->price)</strong>
+                    </p>
                     <p><a href="{{ route('properties.show', $prop->id) }}"
                             class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
                             Details</a></p>
@@ -20,22 +21,6 @@
         </div>
     </div>
     @endforeach
-
-    <div class="site-blocks-cover overlay" style="background-image: url(assets/images/hero_bg_2.jpg);" data-aos="fade"
-        data-stellar-background-ratio="0.5">
-        <div class="container">
-            <div class="row align-items-center justify-content-center text-center">
-                <div class="col-md-10">
-                    <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For
-                        Sale</span>
-                    <h1 class="mb-2">625 S. Berendo St</h1>
-                    <p class="mb-5"><strong class="h2 text-success font-weight-bold"> @currency(1000500) </strong></p>
-                    <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
-                            Details</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="site-section site-section-sm pb-0">
     <div class="container">
@@ -127,12 +112,14 @@
                             class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
-                        <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span class="icon-heart-o"></span></a>
+                        <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span
+                                class="icon-heart-o"></span></a>
                         <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title
                                 }}</a></h2>
                         <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{
                             $prop->address }}</span>
-                        <strong class="property-price text-primary mb-3 d-block text-success">@currency($prop->price)</strong>
+                        <strong
+                            class="property-price text-primary mb-3 d-block text-success">@currency($prop->price)</strong>
                         <ul class="property-specs-wrap mb-3 mb-lg-0">
                             <li>
                                 <span class="property-specs">Beds</span>
