@@ -118,13 +118,21 @@ class PropertyController extends Controller
         $props = $this->propertyRepository->getAllByPrice($order);
         return view('home', compact('props'));
     }
-    public function all_request() {
+    public function all_request()
+    {
         $props = $this->propertyRepository->allRequest(1);
         return view('home', compact('props'));
     }
 
-    public function all_save() {
+    public function all_save()
+    {
         $props = $this->propertyRepository->allSave(1);
+        return view('home', compact('props'));
+    }
+
+    public function search(Request $request)
+    {
+        $props = $this->propertyRepository->all()->filter(fn ($prop) => $prop->type == $request->offers_types || $prop->house_type == $request->list_types);
         return view('home', compact('props'));
     }
 }
