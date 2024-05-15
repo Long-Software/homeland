@@ -4,12 +4,13 @@ namespace App\Repositories;
 
 use App\Models\Property;
 use App\Models\PropertyImage;
+use App\Models\PropertySaved;
 use App\Models\Request;
 use Illuminate\Database\Eloquent\Collection;
 
 class PropertyRepository
 {
-    public function all($order='desc'): Collection
+    public function all($order = 'desc'): Collection
     {
         return Property::orderBy('created_at', $order)->get();
     }
@@ -34,10 +35,27 @@ class PropertyRepository
 
     public function findRequest($id)
     {
-        $requests = Request::where('property_id', $id);
-        return $requests;
+        return Request::where('property_id', $id);
     }
-    public function getAllByPrice($order='desc') {
+    public function allRequest($user_id)
+    {
+        $props = [];
+        foreach(Request::where('user_id', $user_id)->get() as $req) {
+            $props[] = $this->find($req->property_id);
+        }
+        // dd(Request::where('user_id', $user_id));
+        return $props;
+    }
+    public function allSave($user_id)
+    {
+        $props = [];
+        foreach(PropertySaved::where('user_id', $user_id)->get() as $prop) {
+            $props[] = $this->find($prop->property_id);
+        }
+        return $props;
+    }
+    public function getAllByPrice($order = 'desc')
+    {
         $props = Property::orderBy('price', $order)->get();
         return $props;
     }

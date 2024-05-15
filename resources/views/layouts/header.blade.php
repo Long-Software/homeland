@@ -52,6 +52,8 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>
+                <a href="{{ route('properties.save.index') }}" class="dropdown-item">Saved Property</a>
+                <a href="{{ route('properties.request.index') }}" class="dropdown-item">Request Property</a>
               </div>
             </li>
             @else

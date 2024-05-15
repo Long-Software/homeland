@@ -51,8 +51,10 @@
                                     <span class="property-specs-number">{{ $prop->sqaure_foot }}</span>
                                 </li>
                                 <li>
-                                    <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span
-                                        class="icon-heart-o"></span></a>
+                                    <a href="{{ route('properties.save.store', $prop->id) }}"
+                                        class="property-favorite"><button
+                                            class="btn {{ $prop->isSaved(1) ? 'btn-danger': 'btn-primary' }}"><span
+                                                class="icon-heart-o"></span></button></a>
                                 </li>
                             </ul>
                         </div>
@@ -90,7 +92,7 @@
             <div class="col-lg-4">
                 <div class="bg-white widget border rounded">
                     <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
-                    <form action="{{ route('properties.request', $prop->id) }}" method="POST"
+                    <form action="{{ route('properties.request.store', $prop->id) }}" method="POST"
                         class="form-contact-agent">
                         @csrf
                         <div class="form-group">
@@ -165,7 +167,7 @@
                             class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
-                        <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span
+                        <a href="{{ route('properties.save.store', $prop->id) }}" class="property-favorite"><span
                                 class="icon-heart-o"></span></a>
                         <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title
                                 }}</a></h2>

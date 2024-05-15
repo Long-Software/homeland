@@ -26,4 +26,8 @@ class Property extends Model
     ];
     public const TYPE =  ['Rent', 'Buy'];
     public const HOUSE_TYPE = ['Condo', 'Property Land', 'Commercial Building'];
+
+    public function isSaved($user_id) {
+        return PropertySaved::where('property_id', $this->id)->where('user_id', $user_id)->first();
+    }
 }

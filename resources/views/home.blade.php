@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="slide-one-item home-slider owl-carousel">
+    @if (count($props))
     @foreach ($props as $prop)
     <div class="site-blocks-cover overlay" style="background-image: url({{ asset('assets/images/'.$prop->img_url) }});"
         data-aos="fade" data-stellar-background-ratio="0.5">
@@ -21,6 +22,23 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div class="site-blocks-cover overlay" style="background-image: url({{ asset('assets/images/hero_bg_1.jpg') }});"
+        data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row align-items-center justify-content-center text-center">
+                <div class="col-md-10">
+                    <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">N/A</span>
+                    <h1 class="mb-2">N/A</h1>
+                    <p class="mb-5"><strong class="h2 text-success font-weight-bold">@currency(0)</strong>
+                    </p>
+                    <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See
+                            Details</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
 <div class="site-section site-section-sm pb-0">
     <div class="container">
@@ -80,10 +98,13 @@
                     <div class="ml-auto d-flex align-items-center">
                         <div>
                             <a href="{{ route('home') }}" class="view-list px-3 border-right active">All</a>
-                            <a href="{{ route('properties.type', 'Rent') }}" class="view-list px-3 border-right">Rent</a>
+                            <a href="{{ route('properties.type', 'Rent') }}"
+                                class="view-list px-3 border-right">Rent</a>
                             <a href="{{ route('properties.type', 'Buy') }}" class="view-list px-3">Buy</a>
-                            <a href="{{ route('properties.price') }}?order=asc" class="view-list px-3">Price Ascending</a>
-                            <a href="{{ route('properties.price') }}?order=desc" class="view-list px-3">Price Descending</a>
+                            <a href="{{ route('properties.price') }}?order=asc" class="view-list px-3">Price
+                                Ascending</a>
+                            <a href="{{ route('properties.price') }}?order=desc" class="view-list px-3">Price
+                                Descending</a>
                         </div>
                     </div>
                 </div>
@@ -95,6 +116,7 @@
 <div class="site-section site-section-sm bg-light">
     <div class="container">
         <div class="row mb-5">
+            @if (count($props))
             @foreach ($props as $prop)
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="property-entry h-100">
@@ -106,7 +128,7 @@
                             class="img-fluid">
                     </a>
                     <div class="p-4 property-body">
-                        <a href="{{ route('properties.save', $prop->id) }}" class="property-favorite"><span
+                        <a href="{{ route('properties.save.store', $prop->id) }}" class="property-favorite"><span
                                 class="icon-heart-o"></span></a>
                         <h2 class="property-title"><a href="{{ route('properties.show', $prop->id) }}">{{ $prop->title
                                 }}</a></h2>
@@ -132,6 +154,9 @@
                 </div>
             </div>
             @endforeach
+            @else
+            There are no property
+            @endif
         </div>
     </div>
 </div>

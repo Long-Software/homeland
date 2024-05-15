@@ -98,11 +98,13 @@ class PropertyController extends Controller
     public function save($id)
     {
         $prop = $this->propertyRepository->find($id);
-        PropertySaved::create([
-            'property_id' => $prop->id,
-            'user_id' => 1,
-            // 'user_id' => Auth::id(),
-        ]);
+        $isSaved = Property::find($id)->isSaved(1);
+        $isSaved ? $isSaved->delete() :
+            PropertySaved::create([
+                'property_id' => $prop->id,
+                'user_id' => 1,
+                // 'user_id' => Auth::id(),
+            ]);
         return redirect()->back()->with('save property', 'Property has successfully been saved');
     }
     public function type($type)
@@ -110,9 +112,19 @@ class PropertyController extends Controller
         $props = $this->propertyRepository->all()->filter(fn ($prop) => $prop->type == $type || $prop->house_type == $type);
         return view('home', compact('props'));
     }
-    public function price() {
+    public function price()
+    {
         $order = request()->input('order', 'desc');
         $props = $this->propertyRepository->getAllByPrice($order);
+        return view('home', compact('props'));
+    }
+    public function all_request() {
+        $props = $this->propertyRepository->allRequest(1);
+        return view('home', compact('props'));
+    }
+
+    public function all_save() {
+        $props = $this->propertyRepository->allSave(1);
         return view('home', compact('props'));
     }
 }
