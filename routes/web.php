@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,8 @@ Route::resource('properties', PropertyController::class);
 Route::post('/properties/{id}/request', [PropertyController::class, 'request'])->name('properties.request.store');
 Route::get('/properties/{id}/save', [PropertyController::class, 'save'])->name('properties.save.store');
 Route::get('/properties/type/{type}', [PropertyController::class, 'type'])->name('properties.type');
+
+Route::group('admin', function () {
+    Route::get('/login', [AdminController::class, 'login']);
+});
+Route::resource('admin', AdminController::class);

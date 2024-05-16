@@ -14,6 +14,7 @@ class PropertyController extends Controller
     private PropertyRepository $propertyRepository;
     public function __construct(PropertyRepository $propertyRepository)
     {
+        $this->middleware('auth');
         $this->propertyRepository = $propertyRepository;
     }
     /**
@@ -87,8 +88,7 @@ class PropertyController extends Controller
         ModelsRequest::create([
             'property_id' => $id,
             'agent_name' => $request->agent_name,
-            'user_id' => 1,
-            // 'user_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'name' => 'Long',
             'email' => $request->email,
             'phone' => $request->phone
@@ -98,7 +98,7 @@ class PropertyController extends Controller
     public function save($id)
     {
         $prop = $this->propertyRepository->find($id);
-        $isSaved = Property::find($id)->isSaved(1);
+        $isSaved = Property::find($id)->isSaved(Auth::id());
         $isSaved ? $isSaved->delete() :
             PropertySaved::create([
                 'property_id' => $prop->id,
