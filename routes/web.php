@@ -32,7 +32,11 @@ Route::post('/properties/{id}/request', [PropertyController::class, 'request'])-
 Route::get('/properties/{id}/save', [PropertyController::class, 'save'])->name('properties.save.store');
 Route::get('/properties/type/{type}', [PropertyController::class, 'type'])->name('properties.type');
 
-Route::group('admin', function () {
+Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', [AdminController::class, 'login']);
+    Route::post('/login', [AdminController::class, 'logged']);
+    // Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
+    Route::get('/request', [AdminController::class, 'request'])->name('admin.request');
+    Route::get('/property', [AdminController::class, 'property'])->name('admin.property');
 });
-Route::resource('admin', AdminController::class);
+Route::resource('admin', AdminController::class)->middleware('auth:admin');
