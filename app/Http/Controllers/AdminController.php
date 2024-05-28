@@ -112,7 +112,8 @@ class AdminController extends Controller
 
     public function create_gallery()
     {
-        return view('admins.gallery_create');
+        $props = $this->propertyRepository->all();
+        return view('admins.gallery_create', compact('props'));
     }
     public function store_gallery(Request $request)
     {
@@ -122,7 +123,7 @@ class AdminController extends Controller
                 $file->move(public_path('assets/images'), $name);
 
                 PropertyImage::create([
-                    'property_id' => 1,
+                    'property_id' => $request->property_id,
                     'img_url' => $name
                 ]);
             }

@@ -11,13 +11,13 @@
                         <label for="formFileMultiple" class="form-label">Property Images</label>
                         <input name="img_url[]" class="form-control" type="file" id="formFileMultiple" multiple>
                     </div>
-                    <select name="type" class="form-control mt-3 mb-4 form-select" aria-label="Default select example">
+                    <select name="property_id" class="form-control mt-3 mb-4 form-select"
+                        aria-label="Default select example">
                         <option selected>Select Property</option>
-                        <option value="1">871 Crenshaw Blvd</option>
-                        <option value="2">Brooklyn</option>
-                        <option value="3">853 S Lucerne Blvd</option>
+                        @foreach ($props as $prop)
+                        <option value="{{ $prop->id }}">{{ $prop->title }}</option>
+                        @endforeach
                     </select>
-                    <!-- Submit button -->
                     <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
                 </form>
             </div>

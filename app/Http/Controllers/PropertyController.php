@@ -49,7 +49,7 @@ class PropertyController extends Controller
     {
         $this->middleware('auth');
         $prop = $this->propertyRepository->find($id);
-        $propImgs = $this->propertyRepository->findImage(1);
+        $propImgs = $this->propertyRepository->findImage($id);
         $relProps = $this->propertyRepository->findRelated($id);
         return view('pages.property.single-property', compact('prop', 'propImgs', 'relProps'));
     }
@@ -78,6 +78,12 @@ class PropertyController extends Controller
         $prop = $this->propertyRepository->find($id);
         if (file_exists(public_path('assets/images/' . $prop->img_url)))
             unlink(public_path('assets/images/' . $prop->img_url));
+
+        $prop_imgs = $this->propertyRepository->findImage($id);
+        foreach ($prop_imgs as $img) {
+            if (file_exists(public_path('assets/images/' . $img->img_url)))
+                unlink(public_path('assets/images/' . $img->img_url));
+        }
         $prop->delete();
         return redirect()->route('properties.index')->with('success', 'Property has been deleted');
     }

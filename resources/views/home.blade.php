@@ -4,8 +4,9 @@
 <div class="slide-one-item home-slider owl-carousel">
     @if (count($props))
     @foreach ($props as $prop)
-    <div class="site-blocks-cover overlay" style="background-image: url('{{ asset('assets/images/'.$prop->img_url) }}');"
-        data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover overlay"
+        style="background-image: url('{{ asset('assets/images/'.$prop->img_url) }}');" data-aos="fade"
+        data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
@@ -67,19 +68,6 @@
                             </select>
                         </div>
                     </div>
-                    {{-- <div class="col-md-3">
-                        <label for="select-city">Select City</label>
-                        <div class="select-wrap">
-                            <span class="icon icon-arrow_drop_down"></span>
-                            <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                                <option value="New York">New York</option>
-                                <option value="Brooklyn">Brooklyn</option>
-                                <option value="London">London</option>
-                                <option value="Japan">Japan</option>
-                                <option value="Philippines">Philippines</option>
-                            </select>
-                        </div>
-                    </div> --}}
                     <div class="col-md-3">
                         <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
                     </div>
