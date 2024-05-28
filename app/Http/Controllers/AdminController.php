@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\PropertyImage;
 use App\Models\Request as ModelsRequest;
 use App\Repositories\PropertyRepository;
+use Faker\Core\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -81,10 +84,7 @@ class AdminController extends Controller
         }
         return redirect()->back()->with(['error' => 'error logging in']);
     }
-    // public function home() {
-    //     $types = Property::HOUSE_TYPE;
-    //     return view('admins.home', compact('types'));
-    // }
+
     public function request()
     {
         $requests = ModelsRequest::all();
@@ -93,7 +93,41 @@ class AdminController extends Controller
     public function property()
     {
         $properties = $this->propertyRepository->all();
-        return view('admins.request', compact('properties'));
+        return view('admins.property', compact('properties'));
+    }
+    public function create_property()
+    {
+        return view('admins.property_create');
+    }
+    public function store_property(Request $request)
+    {
+        $path = 'assets/images/';
+        $image = $request->img_url->getClientOriginalName();
+        $request->img_url->move(public_path($path), $image);
+        $prop = Property::create([...$request->all(), 'img_url' => $image]);
+        if ($prop) {
+            return redirect()->route('admin.property')->with('success', 'Property has been added');
+        }
+    }
+
+    public function create_gallery()
+    {
+        return view('admins.gallery_create');
+    }
+    public function store_gallery(Request $request)
+    {
+        if ($request->hasFile('img_url')) {
+            foreach ($request->file('img_url') as $file) {
+                $name = time() . rand(1, 50) . '.' . $file->extension();
+                $file->move(public_path('assets/images'), $name);
+
+                PropertyImage::create([
+                    'property_id' => 1,
+                    'img_url' => $name
+                ]);
+            }
+        }
+        return redirect()->route('admin.property')->with('success', 'Gallery has been added');
     }
 }
 

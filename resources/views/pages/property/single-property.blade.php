@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
+{{-- {{ dd(asset('assets/images/'.$prop->img_url)) }} --}}
 <div class="site-blocks-cover inner-page-cover overlay"
-    style="background-image: url({{ asset('assets/images/'.$prop->img_url) }});" data-aos="fade"
+    style="background-image: url('{{ asset('assets/images/'.$prop->img_url) }}');" data-aos="fade"
     data-stellar-background-ratio="0.5">
     <div class="container">
         <div class="row align-items-center justify-content-center text-center">
@@ -16,7 +17,7 @@
 @if (session()->has('make request'))
 <div class="container">
     <div class="alert alert-success">
-        <p>{{ !! session('success') }}</p>
+        <p>{{ session('success') }}</p>
     </div>
 </div>
 @endif

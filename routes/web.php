@@ -35,8 +35,12 @@ Route::get('/properties/type/{type}', [PropertyController::class, 'type'])->name
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', [AdminController::class, 'login']);
     Route::post('/login', [AdminController::class, 'logged']);
-    // Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
     Route::get('/request', [AdminController::class, 'request'])->name('admin.request');
     Route::get('/property', [AdminController::class, 'property'])->name('admin.property');
+    Route::get('/property/create', [AdminController::class, 'create_property'])->name('admin.property.create');
+    Route::post('/property', [AdminController::class, 'store_property'])->name('admin.property.store');
+
+    Route::get('/gallery/create', [AdminController::class, 'create_gallery'])->name('admin.gallery.create');
+    Route::post('/gallery', [AdminController::class, 'store_gallery'])->name('admin.gallery.store');
 });
 Route::resource('admin', AdminController::class)->middleware('auth:admin');

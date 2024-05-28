@@ -8,13 +8,13 @@ use App\Models\Request as ModelsRequest;
 use App\Repositories\PropertyRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PropertyController extends Controller
 {
     private PropertyRepository $propertyRepository;
     public function __construct(PropertyRepository $propertyRepository)
     {
-        $this->middleware('auth');
         $this->propertyRepository = $propertyRepository;
     }
     /**
@@ -47,6 +47,7 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
+        $this->middleware('auth');
         $prop = $this->propertyRepository->find($id);
         $propImgs = $this->propertyRepository->findImage(1);
         $relProps = $this->propertyRepository->findRelated($id);
@@ -74,11 +75,16 @@ class PropertyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $prop = $this->propertyRepository->find($id);
+        if (file_exists(public_path('assets/images/' . $prop->img_url)))
+            unlink(public_path('assets/images/' . $prop->img_url));
+        $prop->delete();
+        return redirect()->route('properties.index')->with('success', 'Property has been deleted');
     }
 
     public function request(Request $request, $id)
     {
+        $this->middleware('auth');
         $request->validate([
             'agent_name' => 'required',
             'email' => 'required|email',
@@ -97,13 +103,13 @@ class PropertyController extends Controller
     }
     public function save($id)
     {
+        $this->middleware('auth');
         $prop = $this->propertyRepository->find($id);
         $isSaved = Property::find($id)->isSaved(Auth::id());
         $isSaved ? $isSaved->delete() :
             PropertySaved::create([
                 'property_id' => $prop->id,
-                'user_id' => 1,
-                // 'user_id' => Auth::id(),
+                'user_id' => Auth::id(),
             ]);
         return redirect()->back()->with('save property', 'Property has successfully been saved');
     }
@@ -120,13 +126,15 @@ class PropertyController extends Controller
     }
     public function all_request()
     {
-        $props = $this->propertyRepository->allRequest(1);
+        $this->middleware('auth');
+        $props = $this->propertyRepository->allRequest(Auth::id());
         return view('home', compact('props'));
     }
 
     public function all_save()
     {
-        $props = $this->propertyRepository->allSave(1);
+        $this->middleware('auth');
+        $props = $this->propertyRepository->allSave(Auth::id());
         return view('home', compact('props'));
     }
 

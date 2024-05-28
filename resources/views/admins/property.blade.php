@@ -4,10 +4,18 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
+                @if (session()->has('success'))
+                <div class="container">
+                    <div class="alert alert-success">
+                        <p>{{ session('success') }}</p>
+                    </div>
+                </div>
+                @endif
                 <h5 class="card-title mb-4 d-inline">Properties</h5>
-                <a href="create-properties.html" class="btn btn-primary mb-4 text-center float-right ">Create
+                <a href="{{ route('admin.property.create') }}"
+                    class="btn btn-primary mb-4 text-center float-right ">Create
                     Properties</a>
-                <a href="create-Gallery.html" class="btn btn-primary mb-4 text-center float-right mr-5">Create
+                <a href="{{ route('admin.gallery.create') }}" class="btn btn-primary mb-4 text-center float-right mr-5">Create
                     Gallery</a>
 
                 <table class="table mt-4">
@@ -27,7 +35,15 @@
                             <td>{{ $property->title }}</td>
                             <td>@currency($property->price)</td>
                             <td>{{ $property->house_type }}</td>
-                            <td><a href="delete-posts.html" class="btn btn-danger  text-center ">delete</a></td>
+                            <td>
+                                <form action="{{ route('properties.destroy', $property->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger text-center">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
