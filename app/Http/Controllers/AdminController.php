@@ -6,9 +6,7 @@ use App\Models\Property;
 use App\Models\PropertyImage;
 use App\Models\Request as ModelsRequest;
 use App\Repositories\PropertyRepository;
-use Faker\Core\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -22,7 +20,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admins.index');
+        $property_count = count(Property::all());
+        $gallery_count = count(PropertyImage::all());
+        $request_count = count(ModelsRequest::all());
+        return view('admins.index', compact('property_count', 'gallery_count', 'request_count'));
     }
 
     /**
